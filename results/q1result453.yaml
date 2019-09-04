@@ -1,0 +1,66 @@
+- Plan: 
+    Node Type: "Aggregate"
+    Strategy: "Sorted"
+    Partial Mode: "Simple"
+    Parallel Aware: false
+    Startup Cost: 0.58
+    Total Cost: 7746723.60
+    Plan Rows: 11475
+    Plan Width: 12
+    Actual Startup Time: 0.061
+    Actual Total Time: 133583.212
+    Actual Rows: 10000
+    Actual Loops: 1
+    Group Key: 
+      - "dim_time.d"
+    Plans: 
+      - Node Type: "Nested Loop"
+        Parent Relationship: "Outer"
+        Parallel Aware: false
+        Join Type: "Left"
+        Startup Cost: 0.58
+        Total Cost: 7043038.35
+        Plan Rows: 140714100
+        Plan Width: 8
+        Actual Startup Time: 0.034
+        Actual Total Time: 110026.364
+        Actual Rows: 93158830
+        Actual Loops: 1
+        Inner Unique: false
+        Plans: 
+          - Node Type: "Index Only Scan"
+            Parent Relationship: "Outer"
+            Parallel Aware: false
+            Scan Direction: "Forward"
+            Index Name: "dim_time_pk"
+            Relation Name: "dim_time"
+            Alias: "dim_time"
+            Startup Cost: 0.29
+            Total Cost: 340.41
+            Plan Rows: 11475
+            Plan Width: 4
+            Actual Startup Time: 0.023
+            Actual Total Time: 16.121
+            Actual Rows: 10000
+            Actual Loops: 1
+            Heap Fetches: 10000
+          - Node Type: "Index Scan"
+            Parent Relationship: "Inner"
+            Parallel Aware: false
+            Scan Direction: "Forward"
+            Index Name: "fact_charts_range_idx"
+            Relation Name: "fact_charts"
+            Alias: "fact_charts"
+            Startup Cost: 0.29
+            Total Cost: 491.11
+            Plan Rows: 12263
+            Plan Width: 12
+            Actual Startup Time: 0.936
+            Actual Total Time: 6.828
+            Actual Rows: 9316
+            Actual Loops: 10000
+            Index Cond: "((created_at <= dim_time.d) AND (dim_time.d < deleted_at))"
+            Rows Removed by Index Recheck: 0
+  Planning Time: 0.238
+  Triggers: 
+  Execution Time: 133588.289
